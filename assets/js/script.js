@@ -70,22 +70,46 @@ const initCustomEvents = function (
 };
 
 const onImageClick = function (event, sliderRootElement, imagesSelector) {
+	// 1. dodać klasę [.js-slider--active], aby pokazać całą sekcję
 	sliderRootElement.classList.add('js-slider--active');
+
+	// 2. wyszukać ściężkę (atrybut [src]) do klikniętego elementu i wstawić do [.js-slider__image]
 	const src = event.target.querySelector('img').getAttribute('src');
 	const sliderImg = document.querySelector('.js-slider__image');
 	sliderImg.setAttribute('src', src);
-	console.log(sliderImg);
-
-	const groupNames = document.querySelectorAll('.gallery__item');
-	groupNames.forEach((el) => {
-		console.log(el.getAttribute('data-slider-group-name'));
-	})
 
 	// 3. pobrać nazwę grupy zapisaną w dataset klikniętego elementu
+	const groupName = event.target.dataset.sliderGroupName;
+	console.log(groupName);
 
 	// 4. wyszukać wszystkie zdjęcia należące do danej grupy, które wykorzystasz do osadzenia w dolnym pasku
+	const imgArr = [...document.querySelectorAll('.gallery__item')];
+	const groupImagesLabel = imgArr.filter(
+		(el) => el.dataset.sliderGroupName === groupName
+	);
+	console.log(groupImagesLabel);
+
 	// 5. utworzyć na podstawie elementu [.js-slider__thumbs-item--prototype] zawartość dla [.js-slider__thumbs]
+	const prototypeSlider = sliderRootElement.querySelector(
+		'.js-slider__thumbs-item--prototype'
+	);
+
+	groupImagesLabel.forEach((el) => {
+		const sliderImgThumb = prototypeSlider.cloneNode(true);
+		const src = el.querySelector('img').getAttribute('src');
+		sliderImgThumb.classList.remove('js-slider__thumbs-item--prototype');
+		sliderImgThumb.querySelector('img').setAttribute('src', src);
+		const parent = sliderRootElement.querySelector('.js-slider__thumbs');
+		parent.appendChild(sliderImgThumb);
+	});
+
 	// 6. zaznaczyć przy pomocy klasy [.js-slider__thumbs-image--current], który element jest aktualnie wyświetlany
+	const thumbsImgList = document.querySelectorAll('.js-slider__thumbs-image');
+	thumbsImgList.forEach((el) => {
+		if (el.getAttribute('src') === src) {
+			el.classList.add('js-slider__thumbs-image--current');
+		}
+	});
 };
 
 const onImageNext = function (event) {
