@@ -122,29 +122,24 @@ function currentDisplayElement(src) {
 }
 
 const onImageNext = function (event) {
-	console.log(this, 'onImageNext');
-	// [this] wskazuje na element [.js-slider]
-
 	// 1. wyszukać aktualny wyświetlany element przy pomocy [.js-slider__thumbs-image--current]
-	const currentElement = document.querySelector(
+	const currentImg = document.querySelector(
 		'.js-slider__thumbs-image--current'
 	);
-	console.log(currentElement);
 
 	// 2. znaleźć element następny do wyświetlenie względem drzewa DOM dla [.js-slider__thumbs]
-	const nextElement = currentElement.nextElementSibling;
+	const nextImgElement = currentImg.parentElement.nextElementSibling;
 
 	// 3. sprawdzić czy ten element istnieje - jeśli nie to [.nextElementSibling] zwróci [null]
-	if (nextElement) {
-		currentElement.classList.remove('js-slider__thumbs-image--current');
-		nextElement.classList.add('js-slider__thumbs-image--current');
-		const sliderImg = document.querySelector('.js-slider__image');
-		sliderImg.setAttribute('src', nextElement.querySelector('img'));
+	if (nextImgElement) {
+		const nextImg = nextImgElement.firstElementChild;
+		// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
+		nextImg.classList.toggle('js-slider__thumbs-image--current');
+		currentImg.classList.toggle('js-slider__thumbs-image--current');
+		// 5. podmienić atrybut o nazwie [src] dla [.js-slider__image]
+		const nextImgSrc = nextImg.getAttribute('src');
+		this.querySelector('.js-slider__image').setAttribute('src', nextImgSrc);
 	}
-
-	// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
-
-	// 5. podmienić atrybut o nazwie [src] dla [.js-slider__image]
 };
 
 const onImagePrev = function (event) {
