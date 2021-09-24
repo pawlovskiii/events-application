@@ -125,11 +125,25 @@ const onImageNext = function (event) {
 	console.log(this, 'onImageNext');
 	// [this] wskazuje na element [.js-slider]
 
-	// todo:
 	// 1. wyszukać aktualny wyświetlany element przy pomocy [.js-slider__thumbs-image--current]
+	const currentElement = document.querySelector(
+		'.js-slider__thumbs-image--current'
+	);
+	console.log(currentElement);
+
 	// 2. znaleźć element następny do wyświetlenie względem drzewa DOM dla [.js-slider__thumbs]
+	const nextElement = currentElement.nextElementSibling;
+
 	// 3. sprawdzić czy ten element istnieje - jeśli nie to [.nextElementSibling] zwróci [null]
+	if (nextElement) {
+		currentElement.classList.remove('js-slider__thumbs-image--current');
+		nextElement.classList.add('js-slider__thumbs-image--current');
+		const sliderImg = document.querySelector('.js-slider__image');
+		sliderImg.setAttribute('src', nextElement.querySelector('img'));
+	}
+
 	// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
+
 	// 5. podmienić atrybut o nazwie [src] dla [.js-slider__image]
 };
 
