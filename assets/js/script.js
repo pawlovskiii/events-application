@@ -27,27 +27,18 @@ const initEvents = function (imagesList, sliderRootElement) {
 		});
 	});
 
-	// todo:
-	// utwórz nasłuchiwanie eventu o nazwie [click], który ma uruchomić event [js-slider-img-next]
-	// na elemencie [.js-slider__nav--next]
 	const navNext = sliderRootElement.querySelector('.js-slider__nav--next');
 	navNext.addEventListener(
 		'click',
 		fireCustomEvent(navNext, 'js-slider-img-next')
 	);
 
-	// todo:
-	// utwórz nasłuchiwanie eventu o nazwie [click], który ma uruchomić event [js-slider-img-prev]
-	// na elemencie [.js-slider__nav--prev]
 	const navPrev = sliderRootElement.querySelector('.js-slider__nav--prev');
 	navPrev.addEventListener(
 		'click',
 		fireCustomEvent(navPrev, 'js-slider-img-prev')
 	);
 
-	// todo:
-	// utwórz nasłuchiwanie eventu o nazwie [click], który ma uruchomić event [js-slider-close]
-	// tylko wtedy, gdy użytkownik kliknie w [.js-slider__zoom]
 	const zoom = sliderRootElement.querySelector('.js-slider__zoom');
 	zoom.addEventListener('click', fireCustomEvent(zoom, 'js-slider-close'));
 };
@@ -79,7 +70,6 @@ const initCustomEvents = function (
 };
 
 const onImageClick = function (event, sliderRootElement, imagesSelector) {
-	// todo:
 	sliderRootElement.classList.add('js-slider--active');
 	const src = event.target.querySelector('img').getAttribute('src');
 	const sliderImg = document.querySelector('.js-slider__image');
@@ -90,9 +80,6 @@ const onImageClick = function (event, sliderRootElement, imagesSelector) {
 	groupNames.forEach((el) => {
 		console.log(el.getAttribute('data-slider-group-name'));
 	})
-
-	// 1. dodać klasę [.js-slider--active], aby pokazać całą sekcję
-	// 2. wyszukać ściężkę (atrybut [src]) do klikniętego elementu i wstawić do [.js-slider__image]
 
 	// 3. pobrać nazwę grupy zapisaną w dataset klikniętego elementu
 
