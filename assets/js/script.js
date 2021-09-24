@@ -144,8 +144,6 @@ function switchToNextImg(nextImgElement, currentImg, slider) {
 		// 5. podmienić atrybut o nazwie [src] dla [.js-slider__image]
 		const nextImgSrc = nextImg.getAttribute('src');
 		slider.querySelector('.js-slider__image').setAttribute('src', nextImgSrc);
-
-		// console.log(nextImgSrc);
 	}
 }
 
@@ -181,7 +179,22 @@ function switchToBeforeImg(beforeImgElement, currentImg, slider) {
 }
 
 const onClose = function (event) {
+	if (event.target.classList.contains('js-slider__zoom')) {
+		this.classList.remove('js-slider--active');
+		removeThumbs(this.querySelector('.js-slider__thumbs'));
+		console.log(event);
+	}
 	// todo:
 	// 1. należy usunać klasę [js-slider--active] dla [.js-slider]
 	// 2. należy usunać wszystkie dzieci dla [.js-slider__thumbs] pomijając [.js-slider__thumbs-item--prototype]
 };
+
+function removeThumbs(thumbsParent) {
+	const childrenArr = [...thumbsParent.children];
+	console.log(childrenArr);
+	childrenArr.forEach((el) => {
+		if (!el.classList.contains('js-slider__thumbs-item--prototype')) {
+			thumbsParent.removeChild(el);
+		}
+	});
+}
