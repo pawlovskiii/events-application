@@ -2,7 +2,7 @@ const init = function () {
 	const imagesList = document.querySelectorAll('.gallery__item');
 	imagesList.forEach((img) => {
 		img.dataset.sliderGroupName = Math.random() > 0.5 ? 'nice' : 'good';
-	}); // za każdym przeładowaniem strony przydzielaj inną nazwę grupy dla zdjęcia
+	});
 
 	runJSSlider();
 };
@@ -28,19 +28,19 @@ const initEvents = function (imagesList, sliderRootElement) {
 	});
 
 	const navNext = sliderRootElement.querySelector('.js-slider__nav--next');
-	navNext.addEventListener(
-		'click',
-		fireCustomEvent(navNext, 'js-slider-img-next')
-	);
+	navNext.addEventListener('click', (e) => {
+		fireCustomEvent(e.currentTarget, 'js-slider-img-next');
+	});
 
 	const navPrev = sliderRootElement.querySelector('.js-slider__nav--prev');
-	navPrev.addEventListener(
-		'click',
-		fireCustomEvent(navPrev, 'js-slider-img-prev')
-	);
+	navPrev.addEventListener('click', (e) => {
+		fireCustomEvent(e.currentTarget, 'js-slider-img-prev');
+	});
 
 	const zoom = sliderRootElement.querySelector('.js-slider__zoom');
-	zoom.addEventListener('click', fireCustomEvent(zoom, 'js-slider-close'));
+	zoom.addEventListener('click', (e) => {
+		fireCustomEvent(e.currentTarget, 'js-slider-close');
+	});
 };
 
 const fireCustomEvent = function (element, name) {
