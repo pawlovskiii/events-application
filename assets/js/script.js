@@ -80,9 +80,22 @@ const initCustomEvents = function (
 
 const onImageClick = function (event, sliderRootElement, imagesSelector) {
 	// todo:
+	sliderRootElement.classList.add('js-slider--active');
+	const src = event.target.querySelector('img').getAttribute('src');
+	const sliderImg = document.querySelector('.js-slider__image');
+	sliderImg.setAttribute('src', src);
+	console.log(sliderImg);
+
+	const groupNames = document.querySelectorAll('.gallery__item');
+	groupNames.forEach((el) => {
+		console.log(el.getAttribute('data-slider-group-name'));
+	})
+
 	// 1. dodać klasę [.js-slider--active], aby pokazać całą sekcję
 	// 2. wyszukać ściężkę (atrybut [src]) do klikniętego elementu i wstawić do [.js-slider__image]
+
 	// 3. pobrać nazwę grupy zapisaną w dataset klikniętego elementu
+
 	// 4. wyszukać wszystkie zdjęcia należące do danej grupy, które wykorzystasz do osadzenia w dolnym pasku
 	// 5. utworzyć na podstawie elementu [.js-slider__thumbs-item--prototype] zawartość dla [.js-slider__thumbs]
 	// 6. zaznaczyć przy pomocy klasy [.js-slider__thumbs-image--current], który element jest aktualnie wyświetlany
