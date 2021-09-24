@@ -148,16 +148,31 @@ function switchToNextImg(nextImgElement, currentImg, slider) {
 }
 
 const onImagePrev = function (event) {
-	console.log(this, 'onImagePrev');
-	// [this] wskazuje na element [.js-slider]
 
-	// todo:
 	// 1. wyszukać aktualny wyświetlany element przy pomocy [.js-slider__thumbs-image--current]
+	const slider = document.querySelector('.js-slider');
+	const currentImg = document.querySelector(
+		'.js-slider__thumbs-image--current'
+	);
 	// 2. znaleźć element poprzedni do wyświetlenie względem drzewa DOM dla [.js-slider__thumbs]
+	const beforeImgElement = currentImg.parentElement.previousElementSibling;
+	console.log(beforeImgElement);
+
 	// 3. sprawdzić czy ten element istnieje i czy nie posiada klasy [.js-slider__thumbs-item--prototype]
-	// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
-	// 5. podmienić atrybut [src] dla [.js-slider__image]
+	switchToBeforeImg(beforeImgElement, currentImg, slider);
 };
+
+function switchToBeforeImg(beforeImgElement, currentImg, slider) {
+	if (beforeImgElement) {
+		const beforeImg = beforeImgElement.firstElementChild;
+		// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
+		beforeImg.classList.toggle('js-slider__thumbs-image--current');
+		currentImg.classList.toggle('js-slider__thumbs-image--current');
+		// 5. podmienić atrybut [src] dla [.js-slider__image]
+		const beforeImgSrc = beforeImg.getAttribute('src');
+		slider.querySelector('.js-slider__image').setAttribute('src', beforeImgSrc);
+	}
+}
 
 const onClose = function (event) {
 	// todo:
