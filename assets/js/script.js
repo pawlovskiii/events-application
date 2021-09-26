@@ -30,11 +30,13 @@ const initEvents = function (imagesList, sliderRootElement) {
 	const navNext = sliderRootElement.querySelector('.js-slider__nav--next');
 	navNext.addEventListener('click', (e) => {
 		fireCustomEvent(e.currentTarget, 'js-slider-img-next');
+		e.stopPropagation();
 	});
 
 	const navPrev = sliderRootElement.querySelector('.js-slider__nav--prev');
 	navPrev.addEventListener('click', (e) => {
 		fireCustomEvent(e.currentTarget, 'js-slider-img-prev');
+		e.stopPropagation();
 	});
 
 	const zoom = sliderRootElement.querySelector('.js-slider__zoom');
@@ -182,8 +184,8 @@ const onClose = function (event) {
 	if (event.target.classList.contains('js-slider__zoom')) {
 		this.classList.remove('js-slider--active');
 		removeThumbs(this.querySelector('.js-slider__thumbs'));
-		console.log(event);
 	}
+	event.stopImmediatePropagation();
 	// todo:
 	// 1. należy usunać klasę [js-slider--active] dla [.js-slider]
 	// 2. należy usunać wszystkie dzieci dla [.js-slider__thumbs] pomijając [.js-slider__thumbs-item--prototype]
@@ -191,7 +193,6 @@ const onClose = function (event) {
 
 function removeThumbs(thumbsParent) {
 	const childrenArr = [...thumbsParent.children];
-	console.log(childrenArr);
 	childrenArr.forEach((el) => {
 		if (!el.classList.contains('js-slider__thumbs-item--prototype')) {
 			thumbsParent.removeChild(el);
