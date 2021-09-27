@@ -131,9 +131,11 @@ const onImageNext = function (event) {
 function switchToNextImg(currImg, elementAfterParent) {
 	if (elementAfterParent) {
 		const nextImg = elementAfterParent.querySelector('img');
+		// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
 		currImg.classList.toggle('js-slider__thumbs-image--current');
 		nextImg.classList.toggle('js-slider__thumbs-image--current');
 		const sliderImg = document.querySelector('.js-slider__image');
+		// 5. podmienić atrybut o nazwie [src] dla [.js-slider__image]
 		const nextImgSrc = nextImg.getAttribute('src');
 		sliderImg.setAttribute('src', nextImgSrc);
 	} else {
@@ -150,31 +152,34 @@ function switchToNextImg(currImg, elementAfterParent) {
 
 const onImagePrev = function (event) {
 	// 1. wyszukać aktualny wyświetlany element przy pomocy [.js-slider__thumbs-image--current]
-	const slider = document.querySelector('.js-slider');
-	const currentImg = document.querySelector(
-		'.js-slider__thumbs-image--current'
-	);
+	const currImg = document.querySelector('.js-slider__thumbs-image--current');
+	const parentCurrImg = currImg.parentElement;
 	// 2. znaleźć element poprzedni do wyświetlenie względem drzewa DOM dla [.js-slider__thumbs]
-	const beforeImgElement = currentImg.parentElement.previousElementSibling;
+	const elementBeforeParent = parentCurrImg.previousElementSibling;
 	// 3. sprawdzić czy ten element istnieje i czy nie posiada klasy [.js-slider__thumbs-item--prototype]
-	switchToBeforeImg(beforeImgElement, currentImg, slider);
+	switchToBeforeImg(currImg, elementBeforeParent);
 };
 
-function switchToBeforeImg(beforeImgElement, currentImg, slider) {
-	if (beforeImgElement) {
-		const beforeImg = beforeImgElement.firstElementChild;
-		if (beforeImg.getAttribute('src')) {
-			// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
-			beforeImg.classList.toggle('js-slider__thumbs-image--current');
-			currentImg.classList.toggle('js-slider__thumbs-image--current');
-			// 5. podmienić atrybut [src] dla [.js-slider__image]
-			const beforeImgSrc = beforeImg.getAttribute('src');
-			if (beforeImgSrc) {
-				slider
-					.querySelector('.js-slider__image')
-					.setAttribute('src', beforeImgSrc);
-			}
-		}
+function switchToBeforeImg(currImg, elementBeforeParent) {
+	if (
+		!elementBeforeParent.classList.contains('js-slider__thumbs-item--prototype')
+	) {
+		const prevImg = elementBeforeParent.querySelector('img');
+		// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
+		currImg.classList.toggle('js-slider__thumbs-image--current');
+		prevImg.classList.toggle('js-slider__thumbs-image--current');
+		const sliderImg = document.querySelector('.js-slider__image');
+		// 5. podmienić atrybut [src] dla [.js-slider__image]
+		const newSrcCurr = prevImg.getAttribute('src');
+		sliderImg.setAttribute('src', newSrcCurr);
+	} else {
+		const lastImg =
+			currImg.parentElement.parentElement.lastElementChild.querySelector('img');
+		currImg.classList.toggle('js-slider__thumbs-image--current');
+		lastImg.classList.toggle('js-slider__thumbs-image--current');
+		const sliderImg = document.querySelector('.js-slider__image');
+		const newSrcCurr = lastImg.getAttribute('src');
+		sliderImg.setAttribute('src', newSrcCurr);
 	}
 }
 
