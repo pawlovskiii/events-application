@@ -120,25 +120,31 @@ function currentDisplayElement(src) {
 
 const onImageNext = function (event) {
 	// 1. wyszukać aktualny wyświetlany element przy pomocy [.js-slider__thumbs-image--current]
-	const slider = document.querySelector('.js-slider');
-	const currentImg = document.querySelector(
-		'.js-slider__thumbs-image--current'
-	);
+	const currImg = document.querySelector('.js-slider__thumbs-image--current');
+	const parentCurrImg = currImg.parentElement;
 	// 2. znaleźć element następny do wyświetlenie względem drzewa DOM dla [.js-slider__thumbs]
-	const nextImgElement = currentImg.parentElement.nextElementSibling;
+	const elementAfterParent = parentCurrImg.nextElementSibling;
 	// 3. sprawdzić czy ten element istnieje - jeśli nie to [.nextElementSibling] zwróci [null]
-	switchToNextImg(nextImgElement, currentImg, slider);
+	switchToNextImg(currImg, elementAfterParent);
 };
 
-function switchToNextImg(nextImgElement, currentImg, slider) {
-	if (nextImgElement) {
-		const nextImg = nextImgElement.firstElementChild;
-		// 4. przełączyć klasę [.js-slider__thumbs-image--current] do odpowiedniego elementu
+function switchToNextImg(currImg, elementAfterParent) {
+	if (elementAfterParent) {
+		const nextImg = elementAfterParent.querySelector('img');
+		currImg.classList.toggle('js-slider__thumbs-image--current');
 		nextImg.classList.toggle('js-slider__thumbs-image--current');
-		currentImg.classList.toggle('js-slider__thumbs-image--current');
-		// 5. podmienić atrybut o nazwie [src] dla [.js-slider__image]
+		const sliderImg = document.querySelector('.js-slider__image');
 		const nextImgSrc = nextImg.getAttribute('src');
-		slider.querySelector('.js-slider__image').setAttribute('src', nextImgSrc);
+		sliderImg.setAttribute('src', nextImgSrc);
+	} else {
+		const firstImg = currImg.parentElement.parentElement
+			.querySelector('*:nth-child(2)')
+			.querySelector('img');
+		currImg.classList.toggle('js-slider__thumbs-image--current');
+		firstImg.classList.toggle('js-slider__thumbs-image--current');
+		const sliderImg = document.querySelector('.js-slider__image');
+		const firstImgSrc = firstImg.getAttribute('src');
+		sliderImg.setAttribute('src', firstImgSrc);
 	}
 }
 
