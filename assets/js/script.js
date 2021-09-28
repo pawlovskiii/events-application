@@ -189,7 +189,6 @@ const onClose = function (event) {
 		this.classList.remove('js-slider--active');
 		removeThumbs(this.querySelector('.js-slider__thumbs'));
 	}
-	event.stopImmediatePropagation();
 };
 
 function removeThumbs(thumbsParent) {
