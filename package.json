@@ -1,0 +1,31 @@
+{
+	"name": "events-application",
+	"version": "1.0.0",
+	"description": "See the live version of [Events-Application](https://pawlovskiii.github.io/events-application/).",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "webpack serve --mode development --open",
+		"build": "webpack --mode production"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pawlovskiii/events-application.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/pawlovskiii/events-application/issues"
+	},
+	"homepage": "https://github.com/pawlovskiii/events-application#readme",
+	"devDependencies": {
+		"@babel/core": "^7.15.8",
+		"@babel/preset-env": "^7.15.8",
+		"babel-loader": "^8.2.3",
+		"html-webpack-plugin": "^5.4.0",
+		"webpack": "^5.59.1",
+		"webpack-cli": "^4.9.1",
+		"webpack-dev-server": "^3.11.2"
+	}
+}
