@@ -2,13 +2,13 @@
 
 See the live version of [Events-Application](https://pawlovskiii.github.io/events-application/).
 
-The project was mainly about learning of usage of JavaScript Events. 
+In this project 
 
 **Main features**:
 
-- RWD
-- BEM
-- HTML Semantic Elements
+- 
+- 
+- 
 
 ## 💡 Technologies
 
@@ -34,14 +34,9 @@ $ npm install
 $ npm start
 ```
 
-## 💭 Conclusions for future projects
-
-
-
 ## 🙋‍♂️ Feel free to contact me
 
 Find me on [LinkedIn](https://www.linkedin.com/in/jakub-paw%C5%82owski-921b74216/) :)
-
 
 
 ## 👏 Thanks / Special thanks / Credits
