@@ -2,13 +2,14 @@
 
 See the live version of [Events-Application](https://pawlovskiii.github.io/events-application/).
 
-In this project 
+In this project I tried to learn concepts behind Events. In order to respond to user behaviour. 
+That's crucial for building modern web applications. Selectin a specific Event to meet our assumptions.
 
 **Main features**:
 
-- 
-- 
-- 
+- Events
+- DOM manipulation
+- Webpack
 
 ## 💡 Technologies
 
